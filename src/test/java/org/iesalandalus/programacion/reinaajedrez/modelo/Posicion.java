@@ -90,12 +90,19 @@ public class Posicion {
 	
 	public Posicion(int fila, char columna) {
 		
-	    setFila(fila);
+		setFila(fila);
 	    setColumna(columna);
 	    
 	    this.fila=fila; 
 	    this.columna=columna; 		
 	     
+	}
+	
+	// Creamos el método constructor copia, aceptará como parámetro un objeto de tipo Posición llamado "posicion" 
+	
+	public Posicion(Posicion posicion) {
+		
+		
 	}
 		
 }
