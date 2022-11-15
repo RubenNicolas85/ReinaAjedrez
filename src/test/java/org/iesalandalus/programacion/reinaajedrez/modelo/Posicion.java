@@ -107,7 +107,7 @@ public class Posicion {
 		
 	}
 
-	// Creamos los métodos hashCode y Equals para nuestra clase posición
+	// Creamos los métodos hashCode y Equals para nuestra clase Posición
 	
 	@Override
 	public int hashCode() {
@@ -124,6 +124,13 @@ public class Posicion {
 			return false;
 		Posicion other = (Posicion) obj;
 		return columna == other.columna && fila == other.fila;
+	}
+
+	// Creamos el método toString para nuestra clase Posición
+	
+	@Override
+	public String toString() {
+		return "Posicion [fila=" + fila + ", columna=" + columna + "]";
 	}
 		
 }
