@@ -83,4 +83,19 @@ public class Posicion {
 		return columna;
 	}
 
+	/* Creamos el método constructor principal, aceptará dos parámetros, uno de tipo entero para la fila y otro de tipo 
+	 * char para la columna. Usaremos los métodos Set de ambos atributos ya creados para que, en caso de que el valor sea
+	 * correcto, se almacenen en los atributos de clase. En caso contrario, se lanzará una excepción del tipo
+	 * IllegalArgumentException */
+	
+	public Posicion(int fila, char columna) {
+		
+	    setFila(fila);
+	    setColumna(columna);
+	    
+	    this.fila=fila; 
+	    this.columna=columna; 		
+	     
+	}
+		
 }
