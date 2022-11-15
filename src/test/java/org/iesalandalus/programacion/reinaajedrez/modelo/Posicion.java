@@ -85,5 +85,5 @@ public class Posicion {
 		public char getColumna() {
 			
 			return columna;
-		}
+		 }
 }
