@@ -12,11 +12,9 @@ public class Posicion {
 	
 	private void setFila(int fila) {
 		
-		this.fila=fila; 
-		
 		if(fila>=1 && fila<=8) {
 			
-			System.out.println("La fila introducida es correcta");
+			this.fila=fila; 
 		} else{
 			
 		throw new IllegalArgumentException("La fila introducida es incorrecta, por favor, introduzca un número"
@@ -37,41 +35,39 @@ public class Posicion {
 			
 	private void setColumna(char columna) {
 		
-		this.columna=columna; 
-		
 		switch(columna) {
 		
-		case 'a': System.out.println("La columna introducida es 'a'");
+		case 'a': this.columna=columna;
 		break; 
-		case 'A': System.out.println("La columna introducida es 'a'");
+		case 'A': this.columna=columna;
 		break; 
-		case 'b': System.out.println("La columna introducida es 'a'");
+		case 'b': this.columna=columna;
 		break; 
-		case 'B': System.out.println("La columna introducida es 'a'");
+		case 'B': this.columna=columna;
 		break; 
-		case 'c': System.out.println("La columna introducida es 'a'");
+		case 'c': this.columna=columna;
 		break; 
-		case 'C': System.out.println("La columna introducida es 'a'");
+		case 'C': this.columna=columna;
 		break; 
-		case 'd': System.out.println("La columna introducida es 'a'");
+		case 'd': this.columna=columna;
 		break; 
-		case 'D': System.out.println("La columna introducida es 'a'");
+		case 'D': this.columna=columna;
 		break; 
-		case 'e': System.out.println("La columna introducida es 'a'");
+		case 'e': this.columna=columna;
 		break; 
-		case 'E': System.out.println("La columna introducida es 'a'");
+		case 'E': this.columna=columna;
 		break; 
-		case 'f': System.out.println("La columna introducida es 'a'");
+		case 'f': this.columna=columna;
 		break; 
-		case 'F': System.out.println("La columna introducida es 'a'");
+		case 'F': this.columna=columna;
 		break; 
-		case 'g': System.out.println("La columna introducida es 'a'");
+		case 'g': this.columna=columna;
 		break; 
-		case 'G': System.out.println("La columna introducida es 'a'");
+		case 'G': this.columna=columna;
 		break; 
-		case 'h': System.out.println("La columna introducida es 'a'");
+		case 'h': this.columna=columna;
 		break; 
-		case 'H': System.out.println("La columna introducida es 'a'");
+		case 'H': this.columna=columna;
 		break; 
 		
 		default: throw new IllegalArgumentException("La columna introducida es incorrecta, por favor, introduzca una letra entre la "
@@ -82,8 +78,9 @@ public class Posicion {
 		
 	// Creamos el método Getter correspondiente al atributo columna, nos devolverá un dato de tipo char
 	
-		public char getColumna() {
+	public char getColumna() {
 			
-			return columna;
-		 }
+		return columna;
+	}
+
 }
