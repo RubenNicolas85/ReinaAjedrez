@@ -1,12 +1,13 @@
 package org.iesalandalus.programacion.reinaajedrez;
 
+import org.iesalandalus.programacion.utilidades.Entrada;
+
 public class Consola {
 	
 	/* Creamos constructor de la clase sin parámetros y sin almacenamiento en variables, ya que la clase es sólo para 
 	 * métodos y no tiene atributos */
 	
 	private Consola() {
-		
 		
 	}
 	
@@ -17,5 +18,21 @@ public class Consola {
 		 
 		return "MENÚ PRINCIPAL DE LA APLICACIÓN REINA DE AJEDREZ: \n1. Crear reina por defecto"
 				+ "\n2. Crear reina eligiendo el color \n3. Mover \n4. Salir";
+	}
+	
+	/* Se crea el método elegirOpcionMenu, que mostrará un mensaje para que elijamos una opción del menú anteriormente 
+	 * creado y nos pedirá que introduzcamos por teclado la opción hasta que ésta sea valida. Devolverá la opción 
+	 * elegida */
+	
+	public static int elegirOpcionMenu() {
+		
+		int teclado; 
+		
+		do {
+			System.out.println("Por favor, elija una opción del menú: "); 	
+			teclado=Entrada.entero();
+		}while(teclado>=1 && teclado<=4); 
+		
+		return teclado; 
 	}
 }
