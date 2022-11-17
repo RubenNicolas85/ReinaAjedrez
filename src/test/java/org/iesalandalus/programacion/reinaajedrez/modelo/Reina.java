@@ -62,3 +62,23 @@ public class Reina {
 		posicion=new Posicion(1,'d');
 		this.posicion=posicion; 
 	}
+		
+	/* Creamos el método constructor que acepte como parámetro el color y que creará una reina blanca en la posición (1,d)
+	 * y una reina negra en la posición 8d */
+	
+		public Reina(Color color) {
+			
+			if(color==Color.BLANCO) {
+				
+				this.color=Color.BLANCO;
+				posicion=new Posicion(1,'d');
+				this.posicion=posicion; 
+			}
+			
+			if(color==Color.NEGRO) {
+				
+				this.color=Color.NEGRO;
+				posicion=new Posicion(8,'d');
+				this.posicion=posicion; 
+			}
+		}
