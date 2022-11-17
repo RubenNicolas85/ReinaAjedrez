@@ -52,4 +52,13 @@ public class Reina {
 	public Posicion getPosicion() {
 		
 		return posicion; 
-	 } 
+	}  
+	
+	// Creamos el método constructor por defecto para que nos cree una reina blanca en la posición 1d: 
+	
+		public Reina() {
+		
+		color=Color.BLANCO;
+		posicion=new Posicion(1,'d');
+		this.posicion=posicion; 
+	}
