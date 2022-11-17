@@ -104,6 +104,8 @@ public class Posicion {
 	
 	public Posicion(Posicion posicion) {
 		
+		posicion.setFila(fila);
+		posicion.setColumna(columna);
 		
 	}
 
