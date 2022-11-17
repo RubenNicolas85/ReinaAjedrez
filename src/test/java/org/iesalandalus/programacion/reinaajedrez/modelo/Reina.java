@@ -52,4 +52,4 @@ public class Reina {
 	public Posicion getPosicion() {
 		
 		return posicion; 
-	} 
+	 } 
