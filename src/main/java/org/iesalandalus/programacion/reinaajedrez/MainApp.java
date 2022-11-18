@@ -26,11 +26,18 @@ public class MainApp {
 			case 1: 
 				
 					try{
+						
 						crearReinaDefecto();
-						MainApp.mostrarReina();
-						System.out.println(); 
-						MainApp.mover();
-						MainApp.mostrarReina();
+						
+						for(int i=0; i<200; i++) {
+							
+							MainApp.mostrarReina();
+							System.out.println(); 
+							MainApp.mover();
+							MainApp.mostrarReina();
+							System.out.println();
+						}
+						
 						
 					} catch(Exception e) {
 						
@@ -47,11 +54,15 @@ public class MainApp {
 			case 2: 
 					try {
 						reina=new Reina(Consola.elegirColor());
+						
+						for(int i=0; i<200; i++) {
+							
 						MainApp.mostrarReina();
 						System.out.println(); 
 						MainApp.mover();
 						MainApp.mostrarReina();
 						System.out.println();	
+						}
 						
 					}catch(Exception e2) {
 						
@@ -64,8 +75,6 @@ public class MainApp {
 						Consola.despedirse();
 					}
 					 
-					
-					
 			break; 
 			case 3: MainApp.mostrarReina();
 					System.out.println();
@@ -102,15 +111,21 @@ public class MainApp {
 	
 	private static void mover() {
 		
+		for(int i=0; i<200; i++) {
+			
+		
+			
+		
 		Consola.mostrarMenuDirecciones();
 		try {
 			reina.mover(Consola.elegirDireccion(),Consola.elegirPasos());
 			MainApp.mostrarReina();
-			reina.mover(Consola.elegirDireccion(),Consola.elegirPasos());
-			MainApp.mostrarReina();
+			
 		} catch (OperationNotSupportedException e) {
 			
 			System.out.println("Movimiento no permitido, la reina se sale del tablero");
+			System.out.println(); 
+			}
 		}
 	}
 	
