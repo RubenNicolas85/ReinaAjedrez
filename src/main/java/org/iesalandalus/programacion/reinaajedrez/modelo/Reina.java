@@ -99,6 +99,7 @@ public class Reina {
 			char oestenoroestesuroesteblanco='d';
 			oestenoroestesuroesteblanco-=pasos; 
 			char estenorestesurestenegro='d';
+			estenorestesurestenegro-=pasos;
 			char oestenoroestesuroestenegro='d';
 			oestenoroestesuroestenegro+=pasos; 
 			switch (direccion) {
@@ -135,7 +136,7 @@ public class Reina {
 			
 				if(color.equals(color.NEGRO)) {
 					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos+1,estenorestesurestenegro);
+						this.posicion=new Posicion(8-pasos,estenorestesurestenegro);
 					} else{
 						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
 					}
@@ -173,7 +174,7 @@ public class Reina {
 			
 				if(color.equals(color.NEGRO)) {
 					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,oestenoroestesuroestenegro);
+						this.posicion=new Posicion(pasos-8,oestenoroestesuroestenegro);
 					} else{
 						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
 					}
@@ -192,7 +193,7 @@ public class Reina {
 			
 				if(color.equals(color.NEGRO)) {
 					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,sur);
+						this.posicion=new Posicion(pasos-8,sur);
 					} else{
 						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
 					}
@@ -211,7 +212,7 @@ public class Reina {
 			
 				if(color.equals(color.NEGRO)) {
 					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,oestenoroestesuroestenegro);
+						this.posicion=new Posicion(pasos-8,oestenoroestesuroestenegro);
 					} else{
 						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
 					}
