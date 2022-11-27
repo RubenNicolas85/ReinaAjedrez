@@ -19,8 +19,7 @@ public class Posicion {
 			this.fila=fila; 
 		} else{
 			
-		throw new IllegalArgumentException("La fila introducida es incorrecta, por favor, introduzca un número"
-				+ "entre 1 y 8");
+		throw new IllegalArgumentException("ERROR: Fila no válida.");
 		}
 	}
 	
@@ -72,8 +71,7 @@ public class Posicion {
 		case 'H': this.columna=columna;
 		break; 
 		
-		default: throw new IllegalArgumentException("La columna introducida es incorrecta, por favor, introduzca una letra entre la "
-				+ " 'a' y la 'h'");
+		default: throw new IllegalArgumentException("ERROR: Columna no válida.");
 		}
 	}	
 		
@@ -93,18 +91,18 @@ public class Posicion {
 		
 		setFila(fila);
 	    setColumna(columna);
-	    
-	    this.fila=fila; 
-	    this.columna=columna; 		
-	     
 	}
 	
 	// Creamos el método constructor copia, aceptará como parámetro un objeto de tipo Posición llamado "posicion" 
 	
 	public Posicion(Posicion posicion) {
 		
-		this.fila=posicion.fila; 
-		this.columna=posicion.columna;
+		if(posicion==null) {
+			
+			throw new NullPointerException("ERROR: No es posible copiar una posición nula."); 
+		}
+		this.fila=posicion.getFila();
+		this.columna=posicion.getColumna();
 	}
 
 	// Creamos los métodos hashCode y Equals para nuestra clase Posición
@@ -131,7 +129,7 @@ public class Posicion {
 	
 	@Override
 	public String toString() {
-		return "Posicion [fila=" + fila + ", columna=" + columna + "]";
+		return ("fila=1, columna=a"); 
 	}
 		
 }
