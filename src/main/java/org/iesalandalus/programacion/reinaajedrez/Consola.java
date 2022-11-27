@@ -55,10 +55,12 @@ public class Consola {
 		if(pedircolor.equalsIgnoreCase("blanco")) {
 			
 			return Color.BLANCO;
-		}else {
+		}else if (pedircolor.equalsIgnoreCase("negro")) {
 			
 			return Color.NEGRO; 
-		}
+		}else{
+            return null; 
+        }
 	}
 	
 	/* Se crea el método mostrarMenuDirecciones que mostrará por consola un menú con las diferentes direcciones que 
@@ -69,7 +71,7 @@ public class Consola {
 		System.out.println("DIRECCIONES QUE PUEDE TOMAR LA REINA DE AJEDREZ: \n---------------------------------------"
 				+ "---------"
 				+ "\n1. Norte"
-				+ "\n2. Noreste \n3. Este \n4. Sureste \n5. Sur \n6. Suroeste \n7. Oeste \n8. Noroeste "); 
+				+ "\n2. Noreste \n3. Noroeste \n4. Este \n5. Sureste \n6. Sur \n7. Suroeste \n8. Oeste "); 
 	}
 	
 	/* Se crea el método elegirDireccion que mostrará un mensaje indicando que elijamos una dirección del menú 
@@ -79,49 +81,48 @@ public class Consola {
 	public static Direccion elegirDireccion() {
 		
 		int pedirdireccion;
+		pedirdireccion=Entrada.entero();
+		System.out.println("Por favor, elija una de las direcciones del menú anterior: "); 
 		
-		do {
-			System.out.println("Por favor, elija una de las direcciones del menú anterior: "); 	
-			pedirdireccion=Entrada.entero();
-			
-		}while(pedirdireccion<1 && pedirdireccion>8); 
-			
-		if(pedirdireccion==1) {
-			
-			return Direccion.NORTE;
-		}	
-			
-		if(pedirdireccion==2) {
-			
-			return Direccion.NORESTE;
-		}	
+		while(pedirdireccion<1 && pedirdireccion>8) {
+		}
+		
+		switch(pedirdireccion) {
+		
+			case 1: {
+				return Direccion.NORTE;
+			}
+		
+			case 2:{
+				return Direccion.NORESTE;
+			}
+		
+			case 3:{
+				return Direccion.NOROESTE;
+			}
+		 
+			case 4:{
+				return Direccion.ESTE;
+			}
+		
+			case 5:{
+				return Direccion.SURESTE;
+			}
+		
+			case 6:{
+				return Direccion.SUR; 
+			}
+		
+			case 7:{
+				return Direccion.SUROESTE;
+			}
 
-		if(pedirdireccion==3) {
-	
-			return Direccion.ESTE;
-		}	
-
-		if(pedirdireccion==4) {
-	
-			return Direccion.SURESTE;
-		}		
-
-		if(pedirdireccion==5) {
-	
-			return Direccion.SUR;
-		}	
-
-		if(pedirdireccion==6) {
-	
-			return Direccion.SUROESTE;
-		}	
-
-		if(pedirdireccion==7) {
-	
-			return Direccion.OESTE;
-		}else{
-	
-			return Direccion.NOROESTE;
+			case 8:{
+				return Direccion.OESTE;
+			}
+			
+			default: 
+				return Direccion.valueOf(null);
 		}	
 	}	
 	
