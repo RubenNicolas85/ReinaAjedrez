@@ -28,51 +28,45 @@ public class MainApp {
 					try{
 						
 						crearReinaDefecto();
-						
-						for(int i=0; i<200; i++) {
-							
-							MainApp.mostrarReina();
-							System.out.println(); 
-							MainApp.mover();
-							MainApp.mostrarReina();
-							System.out.println();
-						}
-						
+						MainApp.mostrarReina();
+						System.out.println(); 
+						MainApp.mover();
+						MainApp.mostrarReina();
+						System.out.println();
 						
 					} catch(Exception e) {
 						
-						System.out.println(e + "Operación no permitida, el movimiento no es válido porque la reina "
-								+ "se sale del tablero");
+						MainApp.mover();
+						System.out.println(e);
 						
 					}finally {
-						System.out.println();
-						Consola.despedirse();
+						Consola.mostrarMenu();
+						MainApp.mostrarReina();
+						MainApp.ejecutarOpcion(Consola.elegirOpcionMenu());
 					}
 					
 			break;
 			
 			case 2: 
 					try {
-						reina=new Reina(Consola.elegirColor());
-						
-						for(int i=0; i<200; i++) {
-							
+						crearReinaColor(Consola.elegirColor()); 
 						MainApp.mostrarReina();
 						System.out.println(); 
 						MainApp.mover();
 						MainApp.mostrarReina();
 						System.out.println();	
-						}
+						
 						
 					}catch(Exception e2) {
 						
-						System.out.println(e2 + "Operación no permitida, el movimiento no es válido porque la reina "
-								+ "se sale del tablero");
+						MainApp.mover();
+						System.out.println(e2);
 						
 					}finally {
 						
-						System.out.println();
-						Consola.despedirse();
+						Consola.mostrarMenu();
+						MainApp.mostrarReina();
+						MainApp.ejecutarOpcion(Consola.elegirOpcionMenu());
 					}
 					 
 			break; 
@@ -80,8 +74,6 @@ public class MainApp {
 					System.out.println();
 					Consola.mostrarMenu();
 					MainApp.ejecutarOpcion(Consola.elegirOpcionMenu());
-					
-			
 			break;
 			case 4: Consola.despedirse();
 			break;
@@ -101,9 +93,9 @@ public class MainApp {
 	/* Se crea el método crearReinaColor que asignará al atributo de clase reina una nueva instancia de una 
 	 * reina creada con el constructor al que le pasamos el color */
 	
-	private static void crearReinaColor() {
+	private static void crearReinaColor(Color color) {
 		
-		reina=new Reina();
+		reina=new Reina(color);
 	}
 	
 	/* Se crea el método mover que mostrará un menú con las posibles direcciones, nos preguntará por la 
@@ -111,22 +103,24 @@ public class MainApp {
 	
 	private static void mover() {
 		
-		for(int i=0; i<200; i++) {
-			
-		
-			
-		
 		Consola.mostrarMenuDirecciones();
 		try {
 			reina.mover(Consola.elegirDireccion(),Consola.elegirPasos());
 			MainApp.mostrarReina();
 			
 		} catch (OperationNotSupportedException e) {
-			
-			System.out.println("Movimiento no permitido, la reina se sale del tablero");
-			System.out.println(); 
+		
+		}finally {
+			Consola.mostrarMenuDirecciones();
+			try {
+				reina.mover(Consola.elegirDireccion(),Consola.elegirPasos());
+			} catch (OperationNotSupportedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			MainApp.mostrarReina();
 		}
+		
 	}
 	
 	/* Se crea el método mostrarReina que nos mostrará la información de la reina si ésta está creada o de 
