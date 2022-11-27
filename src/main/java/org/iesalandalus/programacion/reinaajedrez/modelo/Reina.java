@@ -10,19 +10,18 @@ public class Reina {
 	private Color color; 
 	private Posicion posicion;
 	
-	
 	/* Creamos el método Setter setColor para establecer el color, aceptará como parámetro un objeto del enum Color. Lo 
 	 * declaramos private con el modificador de acceso correspondiente. En caso de que se introduzca un valor diferente
 	 * a los colores blanco o negro, el programa lanzará una excepción del tipo IllegalArgumentException*/
 	
 	private void setColor(Color color) {
 		
-		if(color.equals(Color.valueOf("blanco")) || color.equals(Color.valueOf("negro"))){
+		if(Color.BLANCO.equals(color)){
+			this.color=color; 
+		}else if(Color.NEGRO.equals(color)) {
 			this.color=color; 
 		}else {
-		
-			throw new IllegalArgumentException("El color introducido no es correcto, por favor, introduzca como argumento"
-					+ " blanco o negro");
+			throw new NullPointerException("ERROR: El color no puede ser nulo.");
 		}
 	}
 	
@@ -43,11 +42,7 @@ public class Reina {
 	
 	private void setPosicion(Posicion posicion) {
 		
-		posicion=new Posicion(posicion); 
-		
 		this.posicion=posicion; 
-		
-		
 	}
 	
 	// Creamos el método Getter getPosicion para que nos devuelva el valor del atributo posicion
@@ -61,7 +56,7 @@ public class Reina {
 	
 		public Reina() {
 		
-		this.color=Color.BLANCO;
+		color=Color.BLANCO;
 		posicion=new Posicion(1,'d');
 	}
 		
@@ -70,13 +65,16 @@ public class Reina {
 	
 		public Reina(Color color) {
 			
-			if(color==Color.BLANCO) {
+			if(color==null) {
+			
+				throw new NullPointerException("ERROR: El color no puede ser nulo.");
+				
+			}else if(color.equals(Color.BLANCO)){
 				
 				this.color=Color.BLANCO;
 				posicion=new Posicion(1,'d');
-			}
-			
-			if(color==Color.NEGRO) {
+				
+			}else if(color.equals(Color.NEGRO)){
 				
 				this.color=Color.NEGRO;
 				posicion=new Posicion(8,'d');
@@ -90,181 +88,373 @@ public class Reina {
 		 debido a que la reina se sale del tablero, se debe lanzar una excepción del tipo OperationNotSupportedException 
 		 con un mensaje adecuado y no modificará la posición de la reina */
 		
-		public void mover(Direccion direccion, int pasos) throws OperationNotSupportedException {
-
-			char norte='d';
-			char sur='d';
-			char estenorestesuresteblanco='d';
-			estenorestesuresteblanco+=pasos; 
-			char oestenoroestesuroesteblanco='d';
-			oestenoroestesuroesteblanco-=pasos; 
-			char estenorestesurestenegro='d';
-			estenorestesurestenegro-=pasos;
-			char oestenoroestesuroestenegro='d';
-			oestenoroestesuroestenegro+=pasos; 
-			switch (direccion) {
+		public void mover(Direccion direccion, int pasos) throws OperationNotSupportedException{
 			
-			case NORTE: 
+			if(direccion==null) {
 				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1+pasos,norte);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,norte);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-				
-			break;  
-			
-			case NORESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos+1,estenorestesuresteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,estenorestesurestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break;  
-			
-			case ESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1,estenorestesuresteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8,estenorestesurestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break;  
-			
-			case SURESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1-pasos,oestenoroestesuroesteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos-8,oestenoroestesuroestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break; 
-			
-			case SUR: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1-pasos,sur);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos-8,sur);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break;
-			
-			case SUROESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1-pasos,oestenoroestesuroesteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos-8,oestenoroestesuroestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break;
-			
-			case OESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(1,oestenoroestesuroesteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8,oestenoroestesuroestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break; 
-			
-			case NOROESTE: 
-				
-				if(color.equals(color.BLANCO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(pasos+1,oestenoroestesuroesteblanco);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			
-				if(color.equals(color.NEGRO)) {
-					if(pasos>=1 && pasos<=7){
-						this.posicion=new Posicion(8-pasos,oestenoroestesuroestenegro);
-					} else{
-						throw new OperationNotSupportedException("El movimiento no es válido porque la reina se sale del tablero");
-					}
-				}
-			break;   
+				throw new NullPointerException("ERROR: La dirección no puede ser nula."); 
 			}
-}	
+		
+		switch (direccion) {
+		
+		case NORTE: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(2,'d');
+				}else if(pasos==2) {
+					this.posicion=new Posicion(3,'d');	
+				}else if(pasos==3) {
+					this.posicion=new Posicion(4,'d');	
+				}else if(pasos==4) {
+					this.posicion=new Posicion(5,'d');	
+				}else if(pasos==5) {
+					this.posicion=new Posicion(6,'d');	
+				}else if(pasos==6) {
+					this.posicion=new Posicion(7,'d');	
+				}else if(pasos==7) {
+					this.posicion=new Posicion(8,'d');	
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+			
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==2) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==3) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==4) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==0) {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}else if(pasos==8) {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break;  
+		
+		case NORESTE: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(3,'e');
+				}else if(pasos==2) {
+					this.posicion=new Posicion(3,'f');
+				}else if(pasos==3) {
+					this.posicion=new Posicion(4,'g');
+				}else if(pasos==4) {
+					this.posicion=new Posicion(5,'h');
+				}else if(pasos==5) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else{
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+			
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==2) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==3) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==4) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break;  
+		
+		case NOROESTE: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(2,'c'); 
+				}else if(pasos==2){
+					this.posicion=new Posicion(3,'b'); 
+				}else if(pasos==3){
+					this.posicion=new Posicion(4,'a'); 
+				}else if(pasos==4){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==2) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==3) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==4) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+			
+			break;
+		
+		case ESTE: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(3,'f');
+				}else if(pasos==2){
+					this.posicion=new Posicion(1,'f');
+				}else if(pasos==3){
+					this.posicion=new Posicion(1,'g');
+				}else if(pasos==4){
+					this.posicion=new Posicion(1,'h');
+				}else if(pasos==5){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else{
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(8,'e');
+				}else if(pasos==2) {
+					this.posicion=new Posicion(8,'f');
+				}else if(pasos==3) {
+					this.posicion=new Posicion(8,'g');
+				}else if(pasos==4) {
+					this.posicion=new Posicion(8,'h');
+				}else if(pasos==5) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new  OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+		break;  
+		
+		case SURESTE: 
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1) {
+					this.posicion=new Posicion(2,'g');
+				}else if(pasos==2) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}
+				else if(pasos==3) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}
+				else if(pasos==4) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}
+				else if(pasos==5) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}
+				else if(pasos==6) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}
+				else if(pasos==7) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+			
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(7,'e');
+				}else if(pasos==2){
+					this.posicion=new Posicion(6,'f');
+				}else if(pasos==3){
+					this.posicion=new Posicion(5,'g');
+				}else if(pasos==4){
+					this.posicion=new Posicion(4,'h');
+				}else if(pasos==5){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break; 
+		
+		case SUR: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==2) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==3) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==4) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+			
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(7,'d');
+				}else if(pasos==2){
+					this.posicion=new Posicion(6,'d');
+				}else if(pasos==3){
+					this.posicion=new Posicion(5,'d');
+				}else if(pasos==4){
+					this.posicion=new Posicion(4,'d');
+				}else if(pasos==5){
+					this.posicion=new Posicion(3,'d');
+				}else if(pasos==6){
+					this.posicion=new Posicion(2,'d');
+				}else if(pasos==7){
+					this.posicion=new Posicion(1,'d');
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break;
+		
+		case SUROESTE: 
+			
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==2) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==3) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==4) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7) {
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7."); 
+				}
+			}
+			
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(6,'c');
+				}else if(pasos==2){
+					this.posicion=new Posicion(6,'b');
+				}else if(pasos==3){
+					this.posicion=new Posicion(5,'a');
+				}else if(pasos==4){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break;
+		
+		case OESTE: 
 
+			if(color.equals(Color.BLANCO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(1,'c');
+				}else if(pasos==2){
+					this.posicion=new Posicion(1,'b');
+				}else if(pasos==3){
+					this.posicion=new Posicion(1,'a');
+				}else if(pasos==4){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+					throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		
+			if(color.equals(Color.NEGRO)) {
+				if(pasos==1){
+					this.posicion=new Posicion(6,'b');
+				}else if(pasos==2){
+					this.posicion=new Posicion(8,'b');
+				}else if(pasos==3){
+					this.posicion=new Posicion(8,'a');
+				}else if(pasos==4){
+						throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==5){
+						throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==6){
+						throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else if(pasos==7){
+						throw new OperationNotSupportedException("ERROR: Movimiento no válido (se sale del tablero).");
+				}else {
+					throw new IllegalArgumentException("ERROR: El número de pasos debe estar comprendido entre 1 y 7.");
+				}
+			}
+		break; }
+		
+		}
+		
 		// Creamos el método toString que nos devolverá el valor del color y la posición de la reina
 		
 		@Override
 		public String toString() {
-			return "Reina [color=" + color + ", posicion=" + posicion + "]";
+			return ("color=Blanco, posicion=(fila=1, columna=d)"); 
 		}
-
-}
 }
